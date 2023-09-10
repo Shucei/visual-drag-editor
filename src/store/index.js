@@ -1,14 +1,12 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+export const useStore = defineStore('store', {
+    state: () => {
+        return { count: 0 }
+    },
+    actions: {
+        increment () {
+            this.count++
+        },
+    },
 })
