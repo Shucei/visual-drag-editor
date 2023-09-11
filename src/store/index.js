@@ -1,12 +1,9 @@
-import { defineStore } from 'pinia'
 
-export const useStore = defineStore('store', {
-    state: () => {
-        return { count: 0 }
-    },
-    actions: {
-        increment () {
-            this.count++
-        },
-    },
-})
+import useEditorStore from './editor'
+
+// 统一导出useStore方法
+export default function useStore() {
+    return {
+        editor: useEditorStore(),
+    }
+}

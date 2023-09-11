@@ -1,19 +1,19 @@
 <template>
-    <div class="home h-screen overflow-hidden">
+    <div class="home  h-screen overflow-hidden">
         <Toolbar />
-        <main class="flex flex-row">
+        <main class="flex">
             <!-- 左侧组件列表 -->
-            <section class="left basis-1/6 bg-red-600">
+            <section class="left  bg-red-600">
                 123
-                <!-- <ComponentList />
-                <RealTimeComponentList /> -->
             </section>
             <!-- 中间画布 -->
-            <section class="center flex-1  bg-yellow-500">
-                456
+            <section class="center  overflow-auto bg-slate-100 shadow-md">
+                <div class="content">
+                    <Editor />
+                </div>
             </section>
             <!-- 右侧属性列表 -->
-            <section class="right basis-1/6 bg-blue-500">
+            <section class="right  bg-blue-500">
                 789
             </section>
         </main>
@@ -21,13 +21,37 @@
 </template>
 
 <script setup>
+// import { storeToRefs } from 'pinia'
 import Toolbar from '@/components/ToolBar.vue'
+import Editor from '@/components/Editor/index.vue'
+// import useStore from '@/store/index.js'
+// const { editor } = useStore()
+
 </script>
 
-<style lang="scss">
-    .home {
-        main{
+<style lang="scss" scoped>
+.home {
+    main {
+        height: 100%;
+
+        .left,
+        .right {
+            width: 290px;
+        }
+
+        .center {
+            width: 100%;
             height: 100%;
+            padding: 20px;
+            padding-bottom: 80px;
+            overflow: auto;
+
+            .content {
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
         }
     }
+}
 </style>
