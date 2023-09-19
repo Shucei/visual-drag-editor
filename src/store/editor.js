@@ -7,8 +7,12 @@ const useEditorStore = defineStore('editor', {
         }
     },
     actions: {
-        increment () {
-            this.count++
+        addComponent({ component, index }) {
+            if (index !== undefined) {
+                this.componentData.splice(index, 0, component)
+            } else {
+                this.componentData.push(component)
+            }
         },
     },
 })

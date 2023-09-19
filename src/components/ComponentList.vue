@@ -4,7 +4,7 @@
             v-for="(item, index) in registerConfig.componentList"
             :key="index"
             class="list"
-            draggable
+            draggable="true"
             :data-index="index"
         >
             <span v-if="item.icon.substr(0, 2) === 'el'" :class="item.icon"></span>
@@ -21,8 +21,7 @@ inject('registerConfig')
 
 const  handleDragStart = (e) => {
     e.dataTransfer.setData('index', e.target.dataset.index) // 设置拖拽数据
-    console.log(e)
-
+    console.log(e.target.dataset.index)
 }
 </script>
 
@@ -48,7 +47,7 @@ const  handleDragStart = (e) => {
         justify-content: center;
 
         &:active {
-            cursor: grabbing;
+            cursor: grabbing; // 拖拽中
         }
 
         .iconfont {

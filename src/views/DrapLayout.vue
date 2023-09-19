@@ -8,7 +8,13 @@
             </section>
             <!-- 中间画布 -->
             <section class="center  overflow-auto bg-slate-100 shadow-md">
-                <div class="content">
+                <div
+                    class="content"
+                    @drop="handleDrop"
+                    @dragover="handleDragOver"
+                    @mousedown="handleMouseDown"
+                    @mouseup="deselectCurComponent"
+                >
                     <Editor />
                 </div>
             </section>
@@ -21,15 +27,60 @@
 </template>
 
 <script setup>
-// import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia'
 import { provide } from 'vue'
 import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
 import ComponentList from '@/components/ComponentList.vue'
 import { registerConfig } from '@/data/components-list.js'
-// import useStore from '@/store/index.js'
-// const { editor } = useStore()
+import { deepCopy,generateID } from '@/utils/utils.js'
+import useStore from '@/store/index.js'
+const { editor,compose } = useStore()
 provide('registerConfig', registerConfig)
+// const { componentData } = storeToRefs(editor)
+const { editorRef } = storeToRefs(compose)
+// 拖拽释放
+const handleDrop = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const index = e.dataTransfer.getData('index')
+    const rectInfo = editorRef.value.getBoundingClientRect() // 获取画布的位置信息
+    if (index) {
+        const component = deepCopy(registerConfig.componentList[index]) // 深拷贝组件配置
+        component.style.top = e.clientY - rectInfo.y
+        component.style.left = e.clientX - rectInfo.x
+        component.id = generateID()
+        // changeComponentSizeWithScale(component) // 根据缩放比例调整组件大小
+        editor.addComponent({ component })
+        // this.$store.commit('addComponent', { component })
+        // this.$store.commit('recordSnapshot')
+    }
+}
+
+const handleDragOver = (e) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'copy'
+}
+
+// const handleMouseDown = (e) => {
+//     e.stopPropagation()
+//     this.$store.commit('setClickComponentStatus', false)
+//     this.$store.commit('setInEditorStatus', true)
+// }
+
+
+// const deselectCurComponent = (e) => {
+//     if (!this.isClickComponent) {
+//         this.$store.commit('setCurComponent', { component: null, index: null })
+//     }
+
+//     // 0 左击 1 滚轮 2 右击
+//     if (e.button != 2) {
+//         this.$store.commit('hideContextMenu')
+//     }
+// }
+
 
 </script>
 
