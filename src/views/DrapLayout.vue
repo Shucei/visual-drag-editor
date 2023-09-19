@@ -3,8 +3,8 @@
         <Toolbar />
         <main class="flex">
             <!-- 左侧组件列表 -->
-            <section class="left  bg-red-600">
-                123
+            <section class="left">
+                <ComponentList></ComponentList>
             </section>
             <!-- 中间画布 -->
             <section class="center  overflow-auto bg-slate-100 shadow-md">
@@ -22,10 +22,14 @@
 
 <script setup>
 // import { storeToRefs } from 'pinia'
+import { provide } from 'vue'
 import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
+import ComponentList from '@/components/ComponentList.vue'
+import { registerConfig } from '@/data/components-list.js'
 // import useStore from '@/store/index.js'
 // const { editor } = useStore()
+provide('registerConfig', registerConfig)
 
 </script>
 

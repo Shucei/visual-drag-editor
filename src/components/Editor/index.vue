@@ -1,15 +1,16 @@
 <template>
-    <div id="editor" class="editor bg-red-500" :style="editorStyle">
-        111
+    <div id="editor" class="editor " :style="editorStyle">
+        <editor-block v-for="block in componentData" :key="block.component" :block="block">
+        </editor-block>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import {  computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
 const { editor } = useStore()
-const { canvasStyleData } = storeToRefs(editor)
+const { canvasStyleData,componentData } = storeToRefs(editor)
 const editorStyle = computed(() => {
     return {
         width: canvasStyleData.value.width + 'px',
