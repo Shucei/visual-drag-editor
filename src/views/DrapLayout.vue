@@ -33,9 +33,9 @@ import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
 import ComponentList from '@/components/ComponentList.vue'
 import { registerConfig } from '@/data/components-list.js'
-import { deepCopy,generateID } from '@/utils/utils.js'
+import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'
-const { editor,compose } = useStore()
+const { editor, compose,contextmenu } = useStore()
 provide('registerConfig', registerConfig)
 // const { componentData } = storeToRefs(editor)
 const { editorRef } = storeToRefs(compose)
@@ -53,8 +53,6 @@ const handleDrop = (e) => {
         component.id = generateID()
         // changeComponentSizeWithScale(component) // 根据缩放比例调整组件大小
         editor.addComponent({ component })
-        // this.$store.commit('addComponent', { component })
-        // this.$store.commit('recordSnapshot')
     }
 }
 
@@ -63,23 +61,23 @@ const handleDragOver = (e) => {
     e.dataTransfer.dropEffect = 'copy'
 }
 
-// const handleMouseDown = (e) => {
-//     e.stopPropagation()
-//     this.$store.commit('setClickComponentStatus', false)
-//     this.$store.commit('setInEditorStatus', true)
-// }
+// 鼠标按下
+const handleMouseDown = (e) => {
+    e.stopPropagation()
+    editor.setClickComponentStatus(false)
+    editor.setInEditorStatus(true)
+}
 
-
-// const deselectCurComponent = (e) => {
-//     if (!this.isClickComponent) {
-//         this.$store.commit('setCurComponent', { component: null, index: null })
-//     }
-
-//     // 0 左击 1 滚轮 2 右击
-//     if (e.button != 2) {
-//         this.$store.commit('hideContextMenu')
-//     }
-// }
+// 鼠标抬起
+const deselectCurComponent = (e) => {
+    if (!editor.isClickComponent) {
+        editor.setCurComponent( { component: null, index: null })
+    }
+    // 0 左击 1 滚轮 2 右击
+    if (e.button != 2) {
+        contextmenu.hideContextMenu()
+    }
+}
 
 
 </script>

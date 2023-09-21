@@ -38,7 +38,7 @@ const  handleDragStart = (e) => {
         width: 80px;
         height: 40px;
         border: 1px solid #ddd;
-        cursor: grab;
+        cursor: grab; // 拖拽
         text-align: center;
         color: #333;
         padding: 2px 5px;

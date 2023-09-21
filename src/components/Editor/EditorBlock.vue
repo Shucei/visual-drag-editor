@@ -1,5 +1,5 @@
 <template>
-    <div class="editor-block" :style="blockStyle">
+    <div class="editor-block">
         <!-- 由于组件存在不同的props需要进行if判断操作不同的props，自定义组件可以做统一的处理 -->
         <component
             :is="componentConfig"
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { computed, ref, defineProps, inject, onMounted } from 'vue'
+import {  ref, defineProps, inject, onMounted } from 'vue'
 
 
 const props = defineProps({
@@ -44,17 +44,12 @@ const props = defineProps({
 
 const registerConfig = inject('registerConfig')
 
-const blockStyle = computed(() => ({
-    top: props.block.style.top + 'px',
-    left: props.block.style.left + 'px',
-    zIndex: props.block.style.zIndex,
-}))
+
 const componentConfig = ref(null)
 
 onMounted(() => {
     const component = props.block.component
     componentConfig.value = registerConfig.componentMap[component].render()
-
 })
 
 </script>
