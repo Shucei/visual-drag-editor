@@ -82,7 +82,7 @@ registerConfig.register({
         left: 0,
         rotate: 0,
         opacity: 1,
-        zIndex: 1,
+
     },
 })
 
@@ -127,7 +127,7 @@ registerConfig.register({
         left: 0,
         rotate: 0,
         opacity: 1,
-        zIndex: 1,
+
     },
 })
 
@@ -176,7 +176,7 @@ registerConfig.register({
         left: 0,
         rotate: 0,
         opacity: 1,
-        zIndex: 1,
+
     },
 })
 

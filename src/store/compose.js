@@ -11,7 +11,7 @@ const useComposeStore = defineStore('compose', {
                     width: 0,
                     height: 0,
                 },
-                components: [],
+                components: [], // 选中区域包含的组件
             },
             editorRef: null,
         }
