@@ -50,14 +50,17 @@ const blockStyle = computed(() => ({
     zIndex: props.block.style.zIndex,
 }))
 const componentConfig = ref(null)
+
 onMounted(() => {
     const component = props.block.component
     componentConfig.value = registerConfig.componentMap[component].render()
+
 })
+
 </script>
 
 <style lang="scss" scoped>
-.editor-block{
-    position: absolute;
-}
+// .editor-block{
+//     position: absolute;
+// }
 </style>

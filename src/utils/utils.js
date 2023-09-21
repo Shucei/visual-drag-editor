@@ -22,3 +22,9 @@ export function deepCopy(target) {
 export function generateID() {
     return nanoid()
 }
+
+
+const components = ['VText', 'RectShape', 'CircleShape']
+export function isPreventDrop(component) { // 判断是否是不可放置的组件
+    return !components.includes(component) && !component.startsWith('SVG')
+}
