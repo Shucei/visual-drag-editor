@@ -4,6 +4,7 @@ const useEditorStore = defineStore('editor', {
     state: () => {
         return {
             ...editorData,
+            editorRef: null,
         }
     },
     actions: {
@@ -53,6 +54,10 @@ const useEditorStore = defineStore('editor', {
             this.isClickComponent = status
         },
 
+        // 设置组件数据(用于撤销恢复)
+        setComponentData(componentData) {
+            this.componentData = componentData
+        },
     },
 })
 

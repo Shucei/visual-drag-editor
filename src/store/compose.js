@@ -13,7 +13,7 @@ const useComposeStore = defineStore('compose', {
                 },
                 components: [], // 选中区域包含的组件
             },
-            editorRef: null,
+
         }
     },
     actions: {

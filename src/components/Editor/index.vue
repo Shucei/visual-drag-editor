@@ -6,8 +6,6 @@
         :style="editorStyle"
         @contextmenu="handleContextMenu"
     >
-        <!-- <editor-block v-for="block in componentData" :key="block.id" :block="block">
-        </editor-block> -->
         <Shape
             v-for="(item, index) in componentData"
             :key="item.id"
@@ -62,9 +60,9 @@ import Shape from './Shape.vue'
 import ContextMenu from './ContextMenu.vue'
 import useStore from '@/store/index.js'
 import { getShapeStyle } from '@/utils/style.js'
-const { editor,compose,contextmenu } = useStore()
-const { canvasStyleData,componentData,curComponent } = storeToRefs(editor)
-const { editorRef } = storeToRefs(compose)
+const { editor,contextmenu } = useStore()
+const { canvasStyleData,componentData,curComponent,editorRef } = storeToRefs(editor)
+
 
 const editorStyle = computed(() => {
     return {
@@ -81,17 +79,17 @@ const handleContextMenu = (e) => {
     e.stopPropagation()
     e.preventDefault()
     // 计算菜单相对于编辑器的位移
-    let target = e.target
-    console.log(target.offsetLeft)
-    let top = e.offsetY // 鼠标相对于元素的位移
+    let target = e.target // 获取事件源
+    let top = e.offsetY // 鼠标相对于元素的位移当前点击的盒子距离当前盒子顶部的距离
     let left = e.offsetX // 鼠标相对于元素的位移
+
     while (target instanceof SVGElement) {
         target = target.parentNode
     } // 如果是svg元素，获取其父元素
 
     while (!target.className.includes('editor')) { // 如果不是编辑器元素
-        left += target.offsetLeft // 获取其相对于编辑器的位移
-        top += target.offsetTop // 获取其相对于编辑器的位移
+        left += target.offsetLeft // 获取其相对于编辑器的位移，当前点击的盒子左边距离当前盒子父元素左边
+        top += target.offsetTop // 当前元素顶部距离最近父元素顶部的距离
         target = target.parentNode // 获取其父元素
     } // 如果不是编辑器元素，获取其相对于编辑器的位移
     contextmenu.showContextMenu({ top, left })

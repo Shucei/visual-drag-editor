@@ -23,7 +23,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
-const { contextmenu,editor } = useStore()
+const { contextmenu,editor,snapshot } = useStore()
 const { curComponent } = storeToRefs(editor)
 const { menuLeft,menuShow,menuTop } = storeToRefs(contextmenu)
 
@@ -39,8 +39,8 @@ const copyComponent = () => {
 
 // 粘贴组件
 const pasteComponent = () => {
-
     contextmenu.pasteComponent(true)
+    snapshot.recordSnapshot()
 }
 
 // 剪切组件
@@ -51,6 +51,7 @@ const cutComponent = () => {
 // 删除组件
 const deleteComponent = () => {
     editor.deleteComponent()
+    snapshot.recordSnapshot()
 }
 
 // 锁定组件
@@ -66,20 +67,24 @@ const unlock = () => {
 // 置顶组件
 const topComponent = () => {
     contextmenu.topComponent()
+    snapshot.recordSnapshot()
 }
 
 // 置底组件
 const bottomComponent = () => {
     contextmenu.bottomComponent()
+    snapshot.recordSnapshot()
 }
 
 // 上移组件
 const upComponent = () => {
     contextmenu.upComponent()
+    snapshot.recordSnapshot()
 }
 // 下移组件
 const downComponent = () => {
     contextmenu.downComponent()
+    snapshot.recordSnapshot()
 }
 </script>
 

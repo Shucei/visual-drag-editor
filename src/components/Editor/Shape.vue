@@ -15,7 +15,7 @@
 import { defineProps,ref } from 'vue'
 // import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
-const { editor, compose } = useStore()
+const { editor,snapshot } = useStore()
 // const { canvasStyleData,componentData,curComponent } = storeToRefs(editor)
 // const { editorRef } = storeToRefs(compose)
 const props = defineProps({
@@ -23,10 +23,6 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
-    // style: {
-    //     type: Object,
-    //     default: () => ({}),
-    // },
     active: {
         type: Boolean,
         default: false,
@@ -52,14 +48,17 @@ const handleMouseDownOnShape = (e) => {
     editor.setClickComponentStatus(true) // 设置点击组件状态
 
     editor.setCurComponent({ component: props.element, index: props.index })
-    if (props.element.isLock) return // 如果锁定则不可移动
+    if (props.element.isLock || e.button === 2) return // 如果锁定则不可移动
     const pos = { ...props.defaultStyle }
     const startY = e.clientY
     const startX = e.clientX
     // 如果直接修改属性，值的类型会变为字符串，所以要转为数值型
     const startTop = Number(pos.top)
     const startLeft = Number(pos.left)
+    // 如果元素没有移动，则不保存快照
+    let hasMove = false
     const move = (moveEvent) => {
+        hasMove = true
         const curX = moveEvent.clientX // 鼠标当前位置
         const curY = moveEvent.clientY // 鼠标当前位置
         pos.top = curY - startY + startTop // 修改top值
@@ -68,6 +67,7 @@ const handleMouseDownOnShape = (e) => {
         editor.setShapeStyle({ ...pos })
     }
     const up = () => {
+        hasMove && snapshot.recordSnapshot()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
     }
@@ -80,6 +80,7 @@ const handleMouseDownOnShape = (e) => {
 const componentRef = ref(null)
 const handleRotate=(e) =>{
     editor.setClickComponentStatus(true) // 设置点击组件状态
+    if (e.button === 2) return // 右击不可旋转
     e.preventDefault()
     e.stopPropagation()
     // 初始坐标和初始角度
@@ -95,7 +96,10 @@ const handleRotate=(e) =>{
 
     // 旋转前的角度
     const rotateDegreeBefore = Math.atan2(startY - centerY, startX - centerX) / (Math.PI / 180) // 旋转前的角度,atan2返回的是弧度值，需要转为角度值
+    // 如果元素没有移动，则不保存快照
+    let hasMove = false
     const move = (moveEvent) => {
+        hasMove = true
         const curX = moveEvent.clientX
         const curY = moveEvent.clientY
         // 旋转后的角度
@@ -107,6 +111,7 @@ const handleRotate=(e) =>{
     }
 
     const up = () => {
+        hasMove && snapshot.recordSnapshot()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
     }

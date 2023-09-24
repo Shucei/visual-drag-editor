@@ -35,10 +35,10 @@ import ComponentList from '@/components/ComponentList.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'
-const { editor, compose,contextmenu } = useStore()
+const { editor,contextmenu,snapshot } = useStore()
 provide('registerConfig', registerConfig)
 // const { componentData } = storeToRefs(editor)
-const { editorRef } = storeToRefs(compose)
+const { editorRef } = storeToRefs(editor)
 // 拖拽释放
 const handleDrop = (e) => {
     e.preventDefault()
@@ -53,6 +53,7 @@ const handleDrop = (e) => {
         component.id = generateID()
         // changeComponentSizeWithScale(component) // 根据缩放比例调整组件大小
         editor.addComponent({ component })
+        snapshot.recordSnapshot()
     }
 }
 
