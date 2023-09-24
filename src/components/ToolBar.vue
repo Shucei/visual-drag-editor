@@ -3,7 +3,7 @@
         <div class="toolbar text-left bg-white h-16">
             <el-button type="primary" @click="handleAceEditorChange">JSON</el-button>
             <el-button type="primary" @click="revocation">撤消</el-button>
-            <el-button type="primary" @click="recover">重做</el-button>
+            <el-button type="primary" @click="recover">恢复</el-button>
         </div>
     </div>
 </template>
@@ -12,7 +12,7 @@
 // import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
-const { editor } = useStore()
+const { editor,snapshot } = useStore()
 const { canvasStyleData } = storeToRefs(editor)
 
 const handleAceEditorChange = () => {
@@ -21,11 +21,12 @@ const handleAceEditorChange = () => {
 
 const revocation = () => {
     console.log('撤消')
-
+    snapshot.revocation()
 }
 
 const recover = () => {
-    console.log('重做')
+    console.log('恢复')
+    snapshot.recover()
 }
 
 
