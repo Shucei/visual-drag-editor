@@ -3,9 +3,9 @@
         <ul @mouseup="handleMouseUp">
             <template v-if="curComponent">
                 <template v-if="!curComponent.isLock">
-                    <li @click="copy">复制</li>
-                    <li @click="paste">粘贴</li>
-                    <li @click="cut">剪切</li>
+                    <li @click="copyComponent">复制</li>
+                    <li @click="pasteComponent">粘贴</li>
+                    <li @click="cutComponent">剪切</li>
                     <li @click="deleteComponent">删除</li>
                     <li @click="lock">锁定</li>
                     <li @click="topComponent">置顶</li>
@@ -15,7 +15,7 @@
                 </template>
                 <li v-else @click="unlock">解锁</li>
             </template>
-            <li v-else @click="paste">粘贴</li>
+            <li v-else @click="pasteComponent">粘贴</li>
         </ul>
     </div>
 </template>
@@ -27,10 +27,60 @@ const { contextmenu,editor } = useStore()
 const { curComponent } = storeToRefs(editor)
 const { menuLeft,menuShow,menuTop } = storeToRefs(contextmenu)
 
+// 点击菜单时不取消当前组件的选中状态，因为点击菜单时会触发mouseup事件，会取消当前组件的选中状态
+const handleMouseUp = () => {
+    editor.setClickComponentStatus(true) // 设置点击组件状态
+}
 
+// 复制组件
+const copyComponent = () => {
+    contextmenu.copyComponent()
+}
 
+// 粘贴组件
+const pasteComponent = () => {
 
+    contextmenu.pasteComponent(true)
+}
 
+// 剪切组件
+const cutComponent = () => {
+    contextmenu.cutComponent()
+}
+
+// 删除组件
+const deleteComponent = () => {
+    editor.deleteComponent()
+}
+
+// 锁定组件
+const lock = () => {
+    contextmenu.lockComponent()
+}
+
+// 解锁组件
+const unlock = () => {
+    contextmenu.unlockComponent()
+}
+
+// 置顶组件
+const topComponent = () => {
+    contextmenu.topComponent()
+}
+
+// 置底组件
+const bottomComponent = () => {
+    contextmenu.bottomComponent()
+}
+
+// 上移组件
+const upComponent = () => {
+    contextmenu.upComponent()
+}
+// 下移组件
+const downComponent = () => {
+    contextmenu.downComponent()
+}
 </script>
 
 <style lang="scss" scoped>

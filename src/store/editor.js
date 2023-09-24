@@ -15,6 +15,21 @@ const useEditorStore = defineStore('editor', {
                 this.componentData.push(component)
             }
         },
+        // 删除组件
+        deleteComponent(index) {
+            if (index === undefined) {
+                index = this.curComponentIndex
+            }
+
+            if (index == this.curComponentIndex) {
+                this.curComponentIndex = null
+                this.curComponent = null
+            }
+
+            if (/\d/.test(index)) {
+                this.componentData.splice(index, 1)
+            }
+        },
         // 移动组件
         setShapeStyle ({ top, left, width, height, rotate }) {
             if (top !== undefined) this.curComponent.style.top = Math.round(top)
@@ -29,6 +44,7 @@ const useEditorStore = defineStore('editor', {
             this.curComponentIndex = index
         },
 
+        // 设置当前选中组件的属性
         setInEditorStatus(status) {
             this.isInEdiotr = status
         },

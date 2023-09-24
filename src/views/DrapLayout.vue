@@ -48,8 +48,8 @@ const handleDrop = (e) => {
     const rectInfo = editorRef.value.getBoundingClientRect() // 获取画布的位置信息
     if (index) {
         const component = deepCopy(registerConfig.componentList[index]) // 深拷贝组件配置
-        component.style.top = e.clientY - rectInfo.y // 根据鼠标位置调整组件位置
-        component.style.left = e.clientX - rectInfo.x // 根据鼠标位置调整组件位置
+        component.style.top = e.clientY - rectInfo.y -20 // 根据鼠标位置调整组件位置
+        component.style.left = e.clientX - rectInfo.x - 30// 根据鼠标位置调整组件位置
         component.id = generateID()
         // changeComponentSizeWithScale(component) // 根据缩放比例调整组件大小
         editor.addComponent({ component })
@@ -64,12 +64,13 @@ const handleDragOver = (e) => {
 // 鼠标按下
 const handleMouseDown = (e) => {
     e.stopPropagation()
-    editor.setClickComponentStatus(false)
+    editor.setClickComponentStatus(false) // 设置点击组件状态, 鼠标按下画布时取消点击组件状态
     editor.setInEditorStatus(true)
 }
 
 // 鼠标抬起
 const deselectCurComponent = (e) => {
+
     if (!editor.isClickComponent) {
         editor.setCurComponent( { component: null, index: null })
     }

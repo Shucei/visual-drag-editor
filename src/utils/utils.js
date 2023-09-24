@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 
+// 深拷贝
 export function deepCopy(target) {
     if (typeof target == 'object') {
         const result = Array.isArray(target) ? [] : {}
@@ -27,4 +28,18 @@ export function generateID() {
 const components = ['VText', 'RectShape', 'CircleShape']
 export function isPreventDrop(component) { // 判断是否是不可放置的组件
     return !components.includes(component) && !component.startsWith('SVG')
+}
+
+// 消息提示
+export  function toast(message = '', type = 'error', duration = 1500) {
+    ElMessage({
+        message,
+        type,
+        duration,
+    })
+}
+
+// 交换数组元素
+export function swap(arr, i, j) {
+    [arr[i], arr[j]] = [arr[j], arr[i]]
 }

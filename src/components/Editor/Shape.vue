@@ -50,8 +50,9 @@ const handleMouseDownOnShape = (e) => {
     e.preventDefault()
     editor.setInEditorStatus(true) // 设置鼠标在编辑器内
     editor.setClickComponentStatus(true) // 设置点击组件状态
-    if (props.element.isLock) return // 如果锁定则不可移动
+
     editor.setCurComponent({ component: props.element, index: props.index })
+    if (props.element.isLock) return // 如果锁定则不可移动
     const pos = { ...props.defaultStyle }
     const startY = e.clientY
     const startX = e.clientX
