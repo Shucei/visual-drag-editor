@@ -70,7 +70,6 @@ const handleMouseDown = (e) => {
 
 // 鼠标抬起
 const deselectCurComponent = (e) => {
-
     if (!editor.isClickComponent) {
         editor.setCurComponent( { component: null, index: null })
     }
