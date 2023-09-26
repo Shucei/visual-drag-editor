@@ -12,12 +12,11 @@
 </template>
 
 <script setup>
-import { defineProps,ref } from 'vue'
+import { defineProps,ref,onMounted } from 'vue'
 // import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
 const { editor,snapshot } = useStore()
-// const { canvasStyleData,componentData,curComponent } = storeToRefs(editor)
-// const { editorRef } = storeToRefs(compose)
+
 const props = defineProps({
     defaultStyle: {
         type: Object,
@@ -36,6 +35,11 @@ const props = defineProps({
         default: 0,
     },
 })
+const componentRef = ref(null)
+onMounted(() => {
+    const rect = componentRef.value.getBoundingClientRect()
+    editor.setComponentWH({ width: rect.width, height: rect.height,component:props.element })
+})
 
 const isActive = () => {
     return props.active && !props.element.isLock // 选中且未锁定
@@ -46,7 +50,6 @@ const handleMouseDownOnShape = (e) => {
     e.preventDefault()
     editor.setInEditorStatus(true) // 设置鼠标在编辑器内
     editor.setClickComponentStatus(true) // 设置点击组件状态
-
     editor.setCurComponent({ component: props.element, index: props.index })
     if (props.element.isLock || e.button === 2) return // 如果锁定则不可移动
     const pos = { ...props.defaultStyle }
@@ -77,7 +80,6 @@ const handleMouseDownOnShape = (e) => {
 }
 
 // 处理旋转
-const componentRef = ref(null)
 const handleRotate=(e) =>{
     editor.setClickComponentStatus(true) // 设置点击组件状态
     if (e.button === 2) return // 右击不可旋转

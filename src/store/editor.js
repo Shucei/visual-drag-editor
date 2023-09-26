@@ -38,6 +38,7 @@ const useEditorStore = defineStore('editor', {
             if (width) this.curComponent.style.width = Math.round(width)
             if (height) this.curComponent.style.height = Math.round(height)
             if (rotate) this.curComponent.style.rotate = Math.round(rotate)
+
         },
         // 设置当前选中组件
         setCurComponent ({ component, index }) {
@@ -57,6 +58,13 @@ const useEditorStore = defineStore('editor', {
         // 设置组件数据(用于撤销恢复)
         setComponentData(componentData) {
             this.componentData = componentData
+        },
+
+        // 设置组件宽高(由于是ui组件库，所以需要渲染后通过ref才能获取宽高)
+        setComponentWH({ width, height,component }) {
+            const cur =  this.componentData.find(item => item.id === component.id)
+            cur.style.width = width
+            cur.style.height = height
         },
     },
 })

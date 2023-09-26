@@ -88,6 +88,7 @@ const handleContextMenu = (e) => {
     } // 如果是svg元素，获取其父元素
 
     while (!target.className.includes('editor')) { // 如果不是编辑器元素
+        // 这一步是因为点击选择的组件时，需要得到选中组件对于编辑器的位移
         left += target.offsetLeft // 获取其相对于编辑器的位移，当前点击的盒子左边距离当前盒子父元素左边
         top += target.offsetTop // 当前元素顶部距离最近父元素顶部的距离
         target = target.parentNode // 获取其父元素

@@ -44,7 +44,7 @@ const handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    const index = e.dataTransfer.getData('index')
+    const index = e.dataTransfer.getData('index') // 获取拖拽数据
     const rectInfo = editorRef.value.getBoundingClientRect() // 获取画布的位置信息
     if (index) {
         const component = deepCopy(registerConfig.componentList[index]) // 深拷贝组件配置

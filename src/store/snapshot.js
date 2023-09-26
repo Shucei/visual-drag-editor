@@ -44,8 +44,7 @@ const useSnapshotStore = defineStore('snapshot', {
         recordSnapshot() {
             // 添加新的快照
             this.snapshotData[++this.snapshotIndex] = deepCopy(editorState.componentData)
-            console.log(this.snapshotIndex,this.snapshotData.length - 1)
-            if (this.snapshotIndex < this.snapshotData.length - 1) {// 如果不是最新的快照，需要删除后面的快照
+            if (this.snapshotIndex < this.snapshotData.length - 1) {// 如果不是最新的快照，需要删除后面的快照,多次撤销后再新增组件，会出现这种情况
                 this.snapshotData = this.snapshotData.slice(0, this.snapshotIndex + 1)
             }
         },

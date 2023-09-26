@@ -56,13 +56,10 @@ const  handleDragStart = (e) => {
         }
 
         .icon-text,
-        .icon-input {
+        .icon-input,.icon-button {
             font-size: 25px;
         }
 
-        .icon-button {
-            font-size: 25px;
-        }
     }
 }
 </style>
