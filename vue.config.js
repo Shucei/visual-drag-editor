@@ -14,6 +14,16 @@ module.exports = defineConfig({
             }),
 
         ],
-
     },
+
+    // chainWebpack(config) {
+    //     config.module
+    //     .rule('worker')
+    //     .test(/\.worker\.js$/)
+    //     .use('worker-loader')
+    //     .loader('worker-loader')
+    //     .end()
+    //     config.module.rule('js').exclude.add(/\.worker\.js$/)
+    // },
+
 })

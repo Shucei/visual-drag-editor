@@ -48,6 +48,8 @@
             ></component>
         </shape>
 
+        <!-- 标线MarkLine -->
+        <MarkLine></MarkLine>
         <!-- 右击菜单 -->
         <ContextMenu />
     </div>
@@ -58,6 +60,7 @@ import {  computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import Shape from './Shape.vue'
 import ContextMenu from './ContextMenu.vue'
+import MarkLine from './MarkLine.vue'
 import useStore from '@/store/index.js'
 import { getShapeStyle } from '@/utils/style.js'
 const { editor,contextmenu } = useStore()

@@ -5,6 +5,10 @@ const useEditorStore = defineStore('editor', {
         return {
             ...editorData,
             editorRef: null,
+            lines: {
+                x: null,
+                y: null,
+            },
         }
     },
     actions: {
@@ -17,7 +21,7 @@ const useEditorStore = defineStore('editor', {
             }
         },
         // 删除组件
-        deleteComponent(index) {
+        deleteComponent (index) {
             if (index === undefined) {
                 index = this.curComponentIndex
             }
@@ -47,24 +51,31 @@ const useEditorStore = defineStore('editor', {
         },
 
         // 设置当前选中组件的属性
-        setInEditorStatus(status) {
+        setInEditorStatus (status) {
             this.isInEdiotr = status
         },
         // 设置点击组件状态
-        setClickComponentStatus(status) {
+        setClickComponentStatus (status) {
             this.isClickComponent = status
         },
 
         // 设置组件数据(用于撤销恢复)
-        setComponentData(componentData) {
+        setComponentData (componentData) {
             this.componentData = componentData
         },
 
         // 设置组件宽高(由于是ui组件库，所以需要渲染后通过ref才能获取宽高)
-        setComponentWH({ width, height,component }) {
-            const cur =  this.componentData.find(item => item.id === component.id)
+        setComponentWH ({ width, height, component }) {
+            const cur = this.componentData.find(item => item.id === component.id)
             cur.style.width = width
             cur.style.height = height
+        },
+
+        setLines ({ x, y }) {
+            this.lines = {
+                x,
+                y,
+            }
         },
     },
 })
