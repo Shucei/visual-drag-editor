@@ -31,7 +31,7 @@
                 :type="item.propValue.type.default"
                 :size="item.propValue.size.default"
                 :truncated="item.propValue.truncated.default"
-                v-text="item.propValue.content"
+                v-text="item.label"
             ></component>
             <component
                 :is="item.render()"
@@ -44,7 +44,7 @@
                 :circle="item.propValue.circle.default"
                 :color="item.propValue.color.default"
                 :loading="item.propValue.loading.default"
-                v-text="item.propValue.content"
+                v-text="item.label"
             ></component>
         </shape>
 

@@ -71,6 +71,7 @@ const useEditorStore = defineStore('editor', {
             cur.style.height = height
         },
 
+        // 设置标线
         setLines ({ x, y }) {
             this.lines = {
                 x,

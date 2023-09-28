@@ -34,6 +34,7 @@ const  handleDragStart = (e) => {
     grid-template-columns: repeat(auto-fill, 80px);
     grid-template-rows: repeat(auto-fill, 40px);
     justify-content: center;
+    border-bottom: 1px solid #59c7f9 ;
     .list {
         width: 80px;
         height: 40px;

@@ -25,7 +25,7 @@ registerConfig.register({
     animations: [], // 组件的动画
     events: {}, // 组件的事件
     propValue: {
-        content: '按钮',
+
         type: {
             type: 'select',
             options: ['primary', 'success', 'warning', 'danger', 'info', 'text'],
@@ -89,13 +89,13 @@ registerConfig.register({
 registerConfig.register({
     component: 'Text',
     icon: 'text',
-    label: '6666',
+    label: '文本',
     preview: () => <ElText>文本</ElText>,
     render: () => <ElText>文本</ElText>,
     animations: [], // 组件的动画
     events: {}, // 组件的事件
     propValue: {
-        content: '文本内容',
+
         type: {
             type: 'select',
             options: ['primary', 'success', 'warning', 'danger', 'info'],

@@ -5,6 +5,7 @@
             <!-- 左侧组件列表 -->
             <section class="left">
                 <ComponentList></ComponentList>
+                <RealTimeComponentList></RealTimeComponentList>
             </section>
             <!-- 中间画布 -->
             <section class="center  overflow-auto bg-slate-100 shadow-md">
@@ -32,6 +33,7 @@ import { provide } from 'vue'
 import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
 import ComponentList from '@/components/ComponentList.vue'
+import  RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'
