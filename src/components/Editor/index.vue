@@ -71,7 +71,7 @@ const editorStyle = computed(() => {
     return {
         width: canvasStyleData.value.width + 'px',
         height: canvasStyleData.value.height + 'px',
-        background: canvasStyleData.value.background,
+        backgroundColor: canvasStyleData.value.backgroundColor,
         color: canvasStyleData.value.color,
         fontSize: canvasStyleData.value.fontSize + 'px',
         opcity: canvasStyleData.value.opcity,

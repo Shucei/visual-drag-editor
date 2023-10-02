@@ -20,8 +20,11 @@
                 </div>
             </section>
             <!-- 右侧属性列表 -->
-            <section class="right  bg-blue-500">
-                789
+            <section class="right">
+                <el-tabs v-if="curComponent">
+                    组件属性
+                </el-tabs>
+                <CanvasAttr v-else></CanvasAttr>
             </section>
         </main>
     </div>
@@ -33,6 +36,7 @@ import { provide } from 'vue'
 import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
 import ComponentList from '@/components/ComponentList.vue'
+import CanvasAttr from '@/components/CanvasAttr.vue'
 import  RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
@@ -40,7 +44,7 @@ import useStore from '@/store/index.js'
 const { editor,contextmenu,snapshot } = useStore()
 provide('registerConfig', registerConfig)
 // const { componentData } = storeToRefs(editor)
-const { editorRef } = storeToRefs(editor)
+const { editorRef,curComponent } = storeToRefs(editor)
 // 拖拽释放
 const handleDrop = (e) => {
     e.preventDefault()

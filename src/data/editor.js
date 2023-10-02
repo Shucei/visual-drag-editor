@@ -6,7 +6,7 @@ export default {
         scale: 100, // 画布缩放比例
         color: '#000', // 画布背景颜色
         opacity: 1, // 画布背景透明度
-        background: '#fff', // 画布背景图片
+        backgroundColor: '#fff', // 画布背景图片
         fontSize: 14, // 画布字体大小
     },
     isInEdiotr: false, // 是否在编辑器中，用于判断复制、粘贴组件时是否生效，如果在编辑器外，则无视这些操作
