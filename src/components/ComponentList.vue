@@ -15,9 +15,6 @@
 
 <script setup>
 import { registerConfig } from '@/data/components-list'
-import { inject } from 'vue'
-
-inject('registerConfig')
 
 const  handleDragStart = (e) => {
     e.dataTransfer.setData('index', e.target.dataset.index) // 设置拖拽数据

@@ -19,7 +19,7 @@ module.exports = {
         'comma-dangle': ['error', 'always-multiline'], // 逗号
         semi: ['error', 'never'], // 分号
         'object-curly-spacing': ['error', 'always'], // 对象花括号前后空格
-        'max-len': ['error', 140], // 单行最大长度
+        'max-len': ['error', 142], // 单行最大长度
         'no-new': 'off', // new
         // 'linebreak-style': 'off', // 换行符
         'import/extensions': 'off', // import
@@ -57,6 +57,7 @@ module.exports = {
         'no-mixed-operators': 'off', // 禁止混合使用不同的操作符
         'no-await-in-loop': 'off', // 禁止在循环中使用await
         'template-curly-spacing': 'off', // 模板字符串中使用空格
+        'no-unused-vars': 'off', // 禁止未使用过的变量
         'vue/html-indent': ['error', 4, {
             attribute: 1, // 属性缩进
             baseIndent: 1, // 基本缩进

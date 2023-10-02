@@ -22,8 +22,11 @@
             <component
                 :is="item.render()"
                 v-if="item.component.startsWith('Input')"
-                v-model="item.label"
+                v-model="item.propValue.modelValue.default"
                 :type="item.propValue.type.default"
+                :placeholder="item.propValue.placeholder.default"
+                :maxlength="item.propValue.maxlength.default"
+                :show-password="item.propValue.ShowPassword.default"
             ></component>
             <component
                 :is="item.render()"

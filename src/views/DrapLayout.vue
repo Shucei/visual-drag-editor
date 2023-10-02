@@ -21,8 +21,17 @@
             </section>
             <!-- 右侧属性列表 -->
             <section class="right">
-                <el-tabs v-if="curComponent">
-                    组件属性
+                <el-tabs v-if="curComponent" v-model="activeName">
+                    <el-tab-pane label="属性" name="attr">
+                        <!-- <component :is="curComponent.component + 'Attr'" /> -->
+                        <ComponentAttr :prop-value="curComponent.propValue"></ComponentAttr>
+                    </el-tab-pane>
+                    <el-tab-pane label="动画" name="animation" style="padding-top: 20px;">
+                        动画
+                    </el-tab-pane>
+                    <el-tab-pane label="事件" name="events" style="padding-top: 20px;">
+                        事件
+                    </el-tab-pane>
                 </el-tabs>
                 <CanvasAttr v-else></CanvasAttr>
             </section>
@@ -32,19 +41,21 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { provide } from 'vue'
+import { ref } from 'vue'
 import Toolbar from '@/components/ToolBar.vue'
 import Editor from '@/components/Editor/index.vue'
 import ComponentList from '@/components/ComponentList.vue'
 import CanvasAttr from '@/components/CanvasAttr.vue'
 import  RealTimeComponentList from '@/components/RealTimeComponentList.vue'
+import ComponentAttr from '@/components/ComponentAttr.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'
 const { editor,contextmenu,snapshot } = useStore()
-provide('registerConfig', registerConfig)
+
 // const { componentData } = storeToRefs(editor)
 const { editorRef,curComponent } = storeToRefs(editor)
+const activeName = ref('attr')
 // 拖拽释放
 const handleDrop = (e) => {
     e.preventDefault()
@@ -94,9 +105,11 @@ const deselectCurComponent = (e) => {
     main {
         height: 100%;
 
-        .left,
-        .right {
+        .left{
             width: 290px;
+        }
+        .right {
+            width: 400px;
         }
 
         .center {
@@ -112,6 +125,11 @@ const deselectCurComponent = (e) => {
                 overflow: auto;
             }
         }
+    }
+
+   ::v-deep .el-tabs__nav-scroll {
+        display: flex;
+        justify-content: center;
     }
 }
 </style>

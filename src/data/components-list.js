@@ -24,8 +24,8 @@ registerConfig.register({
     render: () => <ElButton>按钮</ElButton>,
     animations: [], // 组件的动画
     events: {}, // 组件的事件
+    collapseName: 'style', // 编辑组件时记录当前使用的是哪个折叠面板，再次回来时恢复上次打开的折叠面板，优化用户体验
     propValue: {
-
         type: {
             type: 'select',
             options: ['primary', 'success', 'warning', 'danger', 'info', 'text'],
@@ -41,26 +41,31 @@ registerConfig.register({
         plain: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '朴素按钮',
         },
         round: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '圆角按钮',
         },
         circle: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '圆形按钮',
         },
         loading: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '加载中',
         },
         disabled: {
             type: 'boolean',
-            default: false,
+            default:false,
+            options: [true, false],
             label: '禁用',
         },
         color: {
@@ -94,8 +99,8 @@ registerConfig.register({
     render: () => <ElText>文本</ElText>,
     animations: [], // 组件的动画
     events: {}, // 组件的事件
+    collapseName: 'style', // 编辑组件时记录当前使用的是哪个折叠面板，再次回来时恢复上次打开的折叠面板，优化用户体验
     propValue: {
-
         type: {
             type: 'select',
             options: ['primary', 'success', 'warning', 'danger', 'info'],
@@ -111,6 +116,7 @@ registerConfig.register({
         truncated: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '是否省略',
         },
     },
@@ -138,7 +144,11 @@ registerConfig.register({
     preview: () => <ElInput></ElInput>,
     render: () => <ElInput ></ElInput>,
     propValue: {
-        placeholder: '输入框占位文本',
+        placeholder: {
+            type: 'input',
+            default: '输入框占位文本',
+            label: '占位内容',
+        },
         type: {
             type: 'select',
             options: ['text', 'textarea', 'password'],
@@ -152,17 +162,19 @@ registerConfig.register({
         },
         maxlength: {
             type: 'input',
-            default: null,
+            default: '',
             label: '最大输入长度',
         },
         ShowPassword: {
             type: 'boolean',
             default: false,
+            options: [true, false],
             label: '显示切换密码图标',
         },
     },
     animations: [], // 组件的动画
     events: {}, // 组件的事件
+    collapseName: 'style', // 编辑组件时记录当前使用的是哪个折叠面板，再次回来时恢复上次打开的折叠面板，优化用户体验
     style: { // 组件的样式
         width: 200,
         height: 33,
@@ -176,7 +188,6 @@ registerConfig.register({
         left: 0,
         rotate: 0,
         opacity: 1,
-
     },
 })
 
