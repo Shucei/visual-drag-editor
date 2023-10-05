@@ -7,4 +7,5 @@ import { createPinia } from 'pinia'
 const pinia = createPinia()
 import '@/styles/reset.css' // 引入reset.css
 import '@/styles/global.scss' // 引入公共样式
+import '@/styles/animate.scss' // 引入animate.css
 createApp(App).use(pinia).use(router).mount('#app')

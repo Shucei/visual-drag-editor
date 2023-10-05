@@ -27,7 +27,7 @@
                         <ComponentAttr :prop-value="curComponent.propValue"></ComponentAttr>
                     </el-tab-pane>
                     <el-tab-pane label="动画" name="animation" style="padding-top: 20px;">
-                        动画
+                        <AnimationList></AnimationList>
                     </el-tab-pane>
                     <el-tab-pane label="事件" name="events" style="padding-top: 20px;">
                         事件
@@ -48,6 +48,7 @@ import ComponentList from '@/components/ComponentList.vue'
 import CanvasAttr from '@/components/CanvasAttr.vue'
 import  RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import ComponentAttr from '@/components/ComponentAttr.vue'
+import  AnimationList from '@/components/AnimationList.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'

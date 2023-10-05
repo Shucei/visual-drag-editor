@@ -73,6 +73,11 @@ registerConfig.register({
             default: '',
             label: '颜色',
         },
+        content:{
+            type: 'input',
+            default: '按钮',
+            label: '内容',
+        },
     },
     style: { // 组件的样式
         width: 200,
@@ -119,6 +124,11 @@ registerConfig.register({
             options: [true, false],
             label: '是否省略',
         },
+        content:{
+            type: 'input',
+            default: '文本',
+            label: '内容',
+        },
     },
     style: { // 组件的样式
         width: 200,
@@ -158,7 +168,7 @@ registerConfig.register({
         modelValue: {
             type: 'input',
             default: '',
-            label: '绑定值',
+            label: '内容',
         },
         maxlength: {
             type: 'input',
