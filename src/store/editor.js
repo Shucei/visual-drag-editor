@@ -5,10 +5,12 @@ const useEditorStore = defineStore('editor', {
         return {
             ...editorData,
             editorRef: null,
+            curComponentRef: null,
             lines: {
                 x: null,
                 y: null,
             },
+
         }
     },
     actions: {
@@ -29,6 +31,7 @@ const useEditorStore = defineStore('editor', {
             if (index == this.curComponentIndex) {
                 this.curComponentIndex = null
                 this.curComponent = null
+                this.curComponentRef = null
             }
 
             if (/\d/.test(index)) {
@@ -45,9 +48,10 @@ const useEditorStore = defineStore('editor', {
 
         },
         // 设置当前选中组件
-        setCurComponent ({ component, index }) {
+        setCurComponent ({ component, index, componentRef }) {
             this.curComponent = component
             this.curComponentIndex = index
+            this.curComponentRef = componentRef
         },
 
         // 设置当前选中组件的属性

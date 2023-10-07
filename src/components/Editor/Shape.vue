@@ -37,7 +37,7 @@ const props = defineProps({
         default: 0,
     },
 })
-const componentRef = ref(null)
+const componentRef = ref(null) // 组件ref
 onMounted(() => {
     const rect = componentRef.value.getBoundingClientRect()
     editor.setComponentWH({ width: rect.width, height: rect.height, component: props.element })
@@ -53,7 +53,7 @@ const handleMouseDownOnShape = (e) => {
     e.preventDefault()
     editor.setInEditorStatus(true) // 设置鼠标在编辑器内
     editor.setClickComponentStatus(true) // 设置点击组件状态
-    editor.setCurComponent({ component: props.element, index: props.index })
+    editor.setCurComponent({ component: props.element, index: props.index,componentRef:componentRef.value })
     if (props.element.isLock || e.button === 2) return // 如果锁定则不可移动
     const pos = { ...props.defaultStyle }
     const startY = e.clientY

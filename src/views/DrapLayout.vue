@@ -26,10 +26,10 @@
                         <!-- <component :is="curComponent.component + 'Attr'" /> -->
                         <ComponentAttr :prop-value="curComponent.propValue"></ComponentAttr>
                     </el-tab-pane>
-                    <el-tab-pane label="动画" name="animation" style="padding-top: 20px;">
+                    <el-tab-pane label="动画" name="animation">
                         <AnimationList></AnimationList>
                     </el-tab-pane>
-                    <el-tab-pane label="事件" name="events" style="padding-top: 20px;">
+                    <el-tab-pane label="事件" name="events">
                         事件
                     </el-tab-pane>
                 </el-tabs>

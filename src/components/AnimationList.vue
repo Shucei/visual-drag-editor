@@ -12,7 +12,7 @@
                     @close="removeAnimation(index)"
                 >
                     {{ tag.label }}
-                    <i class="cursor el-icon-setting" @click="handleAnimationSetting(index)"></i>
+                    <!-- <i class="cursor el-icon-setting" @click="handleAnimationSetting(index)"></i> -->
                 </el-tag>
             </div>
         </div>
@@ -59,9 +59,9 @@ import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
 import animationClassData from '@/utils/animationClassData.js'
 import runAnimation from '@/utils/runAnimation'
+import { toast } from '@/utils/utils'
 const { editor } = useStore()
-// const { canvasStyleData } = storeToRefs(editor)
-const { curComponent } = storeToRefs(editor)
+const { curComponent,curComponentRef } = storeToRefs(editor)
 
 
 const isShowAnimation = ref(false)// 是否显示动画列表
@@ -82,23 +82,26 @@ const runAnimations =async (animate) => {
 
 // 预览动画
 const previewAnimate = () => {
-    console.log('previewAnimate')
+    curComponent.value.animations.length || toast('尚未选择动画','warning')
+    runAnimation(curComponentRef.value, curComponent.value.animations)
 }
 
 // 动画设置
-const handleAnimationSetting = (index) => {
-    console.log(index)
-}
+// const handleAnimationSetting = (index) => {
+//     console.log(index)
+// }
 
 // 删除动画
 const removeAnimation = (index) => {
-    curComponent.animations.splice(index, 1)
+    curComponent.value.animations.splice(index, 1)
+    if (!curComponent.value.animations.length) { // 清空动画数据，停止运动
+        curComponentRef.value.classList.remove('animated', 'infinite')
+    }
 }
 
 // 添加动画
 const addAnimation = (animate) => {
-    // curComponent.animations.push(animate)
-    console.log(animate)
+    curComponent.value.animations.push(animate)
     isShowAnimation.value = false
 }
 
