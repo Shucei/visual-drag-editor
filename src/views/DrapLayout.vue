@@ -30,7 +30,7 @@
                         <AnimationList></AnimationList>
                     </el-tab-pane>
                     <el-tab-pane label="事件" name="events">
-                        事件
+                        <EventList></EventList>
                     </el-tab-pane>
                 </el-tabs>
                 <CanvasAttr v-else></CanvasAttr>
@@ -49,12 +49,11 @@ import CanvasAttr from '@/components/CanvasAttr.vue'
 import  RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import ComponentAttr from '@/components/ComponentAttr.vue'
 import  AnimationList from '@/components/AnimationList.vue'
+import EventList from '@/components/EventList.vue'
 import { registerConfig } from '@/data/components-list.js'
 import { deepCopy, generateID } from '@/utils/utils.js'
 import useStore from '@/store/index.js'
 const { editor,contextmenu,snapshot } = useStore()
-
-// const { componentData } = storeToRefs(editor)
 const { editorRef,curComponent } = storeToRefs(editor)
 const activeName = ref('attr')
 // 拖拽释放
