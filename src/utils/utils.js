@@ -43,3 +43,8 @@ export  function toast(message = '', type = 'error', duration = 1500) {
 export function swap(arr, i, j) {
     [arr[i], arr[j]] = [arr[j], arr[i]]
 }
+
+
+export function changeStyleWithScale(value) {
+    return multiply(value, divide(parseInt(store.state.canvasStyleData.scale), 100)) // 除以100是为了把百分比转换成小数
+}

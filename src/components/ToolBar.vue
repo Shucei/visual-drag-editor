@@ -1,19 +1,28 @@
 <template>
     <div>
         <div class="toolbar text-left bg-white h-16">
-            <el-button type="primary" @click="handleAceEditorChange">JSON</el-button>
-            <el-button type="primary" @click="revocation">撤消</el-button>
-            <el-button type="primary" @click="recover">恢复</el-button>
+            <el-button @click="handleAceEditorChange">JSON</el-button>
+            <el-button @click="revocation">撤消</el-button>
+            <el-button @click="recover">恢复</el-button>
+            <el-button @click="preview(false)">预览</el-button>
+            <el-button @click="clearCanvas">清空画布</el-button>
         </div>
+
+        <!-- 预览 -->
+        <Preview v-if="isShowPreview" :is-screenshot="isScreenshot" @close="handlePreviewChange" />
     </div>
 </template>
 
 <script setup>
-// import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import useStore from '@/store/index.js'
-const { editor,snapshot } = useStore()
-const { canvasStyleData } = storeToRefs(editor)
+import Preview from '@/components/Preview.vue'
+const { editor, snapshot } = useStore()
+const { canvasStyleData,editMode } = storeToRefs(editor)
+
+const isShowPreview = ref(false) // 是否显示预览
+const isScreenshot = ref(false) // 是否截图
 
 const handleAceEditorChange = () => {
     console.log(canvasStyleData.value.opacity++)
@@ -29,7 +38,24 @@ const recover = () => {
     snapshot.recover()
 }
 
+// 清空画布
+const clearCanvas = () => {
+    editor.setCurComponent({ component: null, index: null, componentRef: null })
+    editor.setComponentData([])
+    snapshot.recordSnapshot()
+}
 
+// 预览
+const preview = (value) => {
+    isShowPreview.value = true
+    isScreenshot.value = value
+}
+
+// 关闭预览
+const handlePreviewChange = () => {
+    isShowPreview.value = false
+    editMode.value = 'edit'
+}
 </script>
 
 

@@ -56,21 +56,22 @@ const props = defineProps({
         default: () => ({}),
     },
 })
-const activeName = ref('')
+const activeName = ref('style')
 
 const onChange = (val) => {
-    curComponent.collapseName = val
+    curComponent.value.collapseName = val
 }
 
 
 onBeforeMount(() => {
-    activeName.value = curComponent.collapseName
+
+    activeName.value = curComponent.value.collapseName
 })
 
 watch(
     () => curComponent,
     (val) => {
-        activeName.value = curComponent.collapseName
+        activeName.value = curComponent.value.collapseName
     },
 )
 

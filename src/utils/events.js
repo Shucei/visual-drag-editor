@@ -10,7 +10,6 @@ const events = {
 
     alert(msg) {
         if (msg) {
-            // eslint-disable-next-line no-alert
             alert(msg)
         }
     },
