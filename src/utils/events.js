@@ -15,9 +15,7 @@ const events = {
     },
 }
 
-const mixins = {
-    methods: events,
-}
+
 
 const eventList = reactive([
     {
@@ -35,7 +33,6 @@ const eventList = reactive([
 ])
 
 export {
-    mixins,
     events,
     eventList,
 }

@@ -40,7 +40,7 @@ const props = defineProps({
 const componentRef = ref(null) // 组件ref
 onMounted(() => {
     const rect = componentRef.value.getBoundingClientRect()
-    editor.setComponentWH({ width: rect.width, height: rect.height, component: props.element })
+    editor.setComponentWH({ width: rect.width, height: rect.height, component: props.element }) // 设置组件宽高
 })
 
 const isActive = () => {
@@ -81,8 +81,8 @@ const handleMouseDownOnShape = (e) => {
         for (let index = 0; index < lines.y.length; index++) {
             const { dragShift, lineShift } = lines.y[index]
             if (Math.abs(dragShift - pos.top) < 3) {
-                y = lineShift
-                pos.top = dragShift
+                y = lineShift // 线出现的位置
+                pos.top = dragShift //组件的位置
                 break
             }
         }

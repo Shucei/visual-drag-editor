@@ -7,7 +7,11 @@
                 class="canvas"
                 :style="editorStyle"
             >
-                6666
+                <ComponentWrapper
+                    v-for="(item, index) in copyData"
+                    :key="index"
+                    :config="item"
+                />
             </div>
         </div>
     </div>
@@ -16,6 +20,8 @@
 <script setup>
 import { defineProps, computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { deepCopy } from '@/utils/utils'
+import ComponentWrapper from '@/components/ComponentWrapper.vue'
 import useStore from '@/store/index.js'
 const { editor } = useStore()
 const { canvasStyleData } = storeToRefs(editor)
@@ -27,6 +33,9 @@ const props = defineProps({
     },
 })
 const emits = defineEmits(['close'])
+
+const copyData = deepCopy(editor.componentData)
+
 const editorStyle = computed(() => {
     return {
         width: canvasStyleData.value.width + 'px',
